@@ -15,9 +15,12 @@ class CreateAccessControlTable extends Migration
     {
         Schema::create('access_control', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('admin_id');
-            $table->integer('module_id');
-            $table->integer('role_id');
+            $table->integer('admin_id')->unsigned();
+            $table->foreign('admin_id')->references('id')->on('admins'); 
+            $table->integer('module_id')->unsigned();
+            $table->foreign('module_id')->references('id')->on('modules'); 
+            $table->integer('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles'); 
             $table->timestamps();
             $table->softDeletes();
         });
